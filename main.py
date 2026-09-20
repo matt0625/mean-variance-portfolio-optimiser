@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from data import load_prices, compute_returns, TICKERS
-from portfolio import port_vol, port_return, sharpe, min_variance, tangency, constrained_frontier_point, sweep_frontier
+from portfolio import sharpe, min_variance, tangency, sweep_frontier
 from plotting import plot_frontier
 
 RF = 0.02 # risk free rate assumption since real one varies over time but aim of project is to learn the machinery
