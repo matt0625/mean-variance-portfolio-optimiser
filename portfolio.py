@@ -11,11 +11,15 @@ def sharpe(w, mew, sigma, rf):
 
 def min_variance(sigma):
     # a quick derivation using lagrangian multipliers gives that w* = (sigma)-1 * 1 / 1^T * (sigma)-1 * 1
-    numerator = np.linalg.solve(sigma, 1)
-    # denominator is just the sum of entries to z, so..
-    return numerator / np.sum(numerator)
-
+    ones = np.ones(sigma.shape[0])
+    z = np.linalg.solve(sigma, ones)
+    # denominator is just the sum of entries to z, so...
+    return z / z.sum()
 
 
 def tangency(mew, sigma, rf):
-    return
+    # similar lagrangian derivation method this time with ratios
+    m = mew - rf
+    z = np.linalg.solve(sigma, m)
+    return z / z.sum()
+
