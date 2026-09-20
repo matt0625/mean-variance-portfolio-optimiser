@@ -20,6 +20,8 @@ TICKERS = [
 ]
 
 
+# Step 1: use yfinance to get the price data for 2015-2025, then use pandas to compute the returns
+# optimisation: price data is cached in csv so we can directly access it after the first call
 def load_prices(tickers=TICKERS, start=START, end=END, cache=CACHE):
     if cache.exists():
         data = pd.read_csv(cache, index_col=0, parse_dates=True)
