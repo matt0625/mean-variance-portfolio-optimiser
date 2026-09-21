@@ -93,7 +93,8 @@ def main():
 
     extra = {"long-only frontier": (W_lo, "tab:green"),
              "long-only, cap 20%": (W_cap, "tab:purple")}
-    plot_frontier(tickers, mew_v, sigma_m, RF, w_mv, w_tan, W_front, clouds, extra=extra)
+    fig, ax = plot_frontier(tickers, mew_v, sigma_m, RF, w_mv, w_tan, W_front, clouds, extra=extra)
+    fig.savefig("frontier.png", dpi=150, bbox_inches="tight")
 
     s_lo = sharpe(W_lo, mew_v, sigma_m, RF)
     w_lo_sharpe = W_lo[np.argmax(s_lo)]
