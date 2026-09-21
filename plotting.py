@@ -76,3 +76,17 @@ def plot_frontier(tickers, mew_v, sigma_m, rf, w_mv, w_tan, W_front, clouds, ext
     ax.grid(alpha=0.3)
     fig.tight_layout()
     return fig, ax
+
+
+def plot_cumulative(portfolios, test):
+    test_v = test.to_numpy()
+    fig, ax = plt.subplots(figsize=(11, 7))
+    for name, w in portfolios.items():
+        ax.plot(test.index, (1 + test_v @ w).cumprod(), label=name)
+    ax.set_yscale("log")
+    ax.set_ylabel("growth of £1 (log scale)")
+    ax.set_title("Out-of-sample cumulative return (weights frozen at end of 2020)")
+    ax.legend()
+    ax.grid(alpha=0.3)
+    fig.tight_layout()
+    return fig, ax

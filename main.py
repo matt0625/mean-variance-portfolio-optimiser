@@ -2,7 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from data import load_prices, compute_returns, TICKERS
 from portfolio import sharpe, min_variance, tangency, sweep_frontier
-from plotting import plot_frontier
+from plotting import plot_frontier, plot_cumulative, plot_correlation
+from evaluation import evaluation
 
 RF = 0.02 # risk free rate assumption since real one varies over time but aim of project is to learn the machinery
 SPLIT = "2020-12-31"
@@ -99,6 +100,26 @@ def main():
 
     s_cap = sharpe(W_cap, mew_v, sigma_m, RF)
     w_cap_sharpe = W_cap[np.argmax(s_cap)]
+
+    portfolios = {
+        "min variance": w_mv,
+        "tangency": w_tan,
+        "long-only min var": w_lo_mv,
+        "long-only max Sharpe": w_lo_sharpe,
+        "capped min var": w_cap_mv,
+        "capped max Sharpe": w_cap_sharpe,
+        "equal weight": np.ones(N) / N,
+    }
+
+    table = evaluation(portfolios, mew_v, sigma_m, test, RF)
+    print(table.round(3).to_string())
+
+    plot_cumulative(portfolios, test)
+    plot_correlation(test, title="Correlation of daily returns (test period)")
+    for t in ("JPM", "BAC"):
+        print(t, "vs TLT: train", round(train.corr().loc[t, "TLT"], 2),
+              "test", round(test.corr().loc[t, "TLT"], 2))
+
     plt.show()
 
 
