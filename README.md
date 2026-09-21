@@ -1,6 +1,6 @@
 # Mean-Variance Portfolio Optimiser
 
-A from-scratch implementation of Markowitz mean-variance optimisation on 20 US stocks and ETFs, built as a one-day learning project. It derives the optimal portfolios, traces the efficient frontier, adds realistic constraints, and then tests whether the "optimal" weights hold up on data they have never seen.
+A from-scratch implementation of Markowitz mean-variance optimisation on 20 US stocks and ETFs. It derives the optimal portfolios, traces the efficient frontier, adds realistic constraints, and then tests whether the "optimal" weights hold up on data they have never seen.
 
 ![Efficient frontier](frontier.png)
 
